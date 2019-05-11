@@ -4,10 +4,57 @@
 
 	<groupId>io.github.reporting-solutions</groupId>
 	<artifactId>travis-ci-tutorial-java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>travis-ci-tutorial-java</name>
+	<description>travis-ci-tutorial-java</description>
+	<url>https://github.com/reporting-solutions/travis-ci-tutorial-java</url>
+	<properties>
+		<oss.nexus.release>https://oss.sonatype.org/service/local/staging/deploy/maven2</oss.nexus.release>
+		<oss.nexus.snapshot>https://oss.sonatype.org/content/repositories/snapshots</oss.nexus.snapshot>
+	</properties>
+
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<name>oss-release</name>
+			<url>${oss.nexus.release}</url>
+		</repository>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<name>oss-snapshot</name>
+			<url>${oss.nexus.snapshot}</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<developers>
+		<developer>
+			<id>tobeadd</id>
+			<name>to be add</name>
+			<email>tobesupplement@hotmail.com</email>
+			<url>http://www.example.com/jdoe</url>
+			<organization>reporting-solutions</organization>
+			<organizationUrl>https://github.com/reporting-solutions/travis-ci-tutorial-java</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Eclipse Public License 1.0</name>
+			<url>https://www.eclipse.org/legal/epl-v10.html</url>
+			<distribution>repo</distribution>
+			<comments>This commercially-friendly copyleft license provides the ability to commercially license binaries; a modern royalty-free patent license grant; and the ability for linked works to use other licenses, including commercial ones.</comments>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@github.com:reporting-solutions/travis-ci-tutorial-java.git</connection>
+		<developerConnection>scm:git:git@github.com:reporting-solutions/travis-ci-tutorial-java.git</developerConnection>
+		<url>https://github.com/reporting-solutions/travis-ci-tutorial-java</url>
+	</scm>
 
 	<dependencies>
 
@@ -68,7 +115,48 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- To sign the artifacts -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
